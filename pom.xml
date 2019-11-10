@@ -1,0 +1,286 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.airobotics.customer-api</groupId>
+  <artifactId>swagger-model-poc</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>swagger-model-poc</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>   
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<revision>8.99</revision>
+	<jackson.version>2.9.8</jackson.version>
+	<apache.httpclient.version>4.5.3</apache.httpclient.version>
+    <jackson-databind-nullable-version>0.2.0</jackson-databind-nullable-version>
+	<jersey.version>2.28</jersey.version>
+	<grizzly.version>2.4.4</grizzly.version>		
+	<maven.build.timestamp.format>yyyy-MM-dd_HH:mm</maven.build.timestamp.format>
+	<project.version>2.2.1</project.version>
+	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	<junit.jupiter.version>5.5.2</junit.jupiter.version>		
+	<timestamp>${maven.build.timestamp}</timestamp>
+    <swagger.url>https://localhost:8080/api/swagger.yaml</swagger.url>  	
+  </properties>
+
+  <build>
+  	<plugins>
+		<plugin>
+			<!-- https://mvnrepository.com/artifact/io.swagger.codegen.v3/swagger-codegen-maven-plugin -->
+		    <groupId>io.swagger.codegen.v3</groupId>
+		    <artifactId>swagger-codegen-maven-plugin</artifactId>
+		    <version>3.0.13</version>
+		    <executions>
+		        <execution>
+		        	<phase>generate-sources</phase>
+		            <goals>
+		                <goal>generate</goal>
+		            </goals>
+		            <configuration>
+		                <inputSpec>${project.basedir}/swagger.yaml</inputSpec>
+		                <language>java</language>
+		                <library>jersey2</library>
+		                <configOptions>
+		                	<groupId>com.airobotics.swwagger-poc</groupId>
+		                	<artifactId>swagger-poc</artifactId>
+		                	<dateLibrary>legacy</dateLibrary>
+		                	<ensureUniqueParams>false</ensureUniqueParams>
+		                	<java8>true</java8>
+		                </configOptions>
+		            </configuration>
+		        </execution>
+		    </executions>
+		</plugin>  	
+  	</plugins>
+  	<pluginManagement>
+  		<plugins>
+  			<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+  			<plugin>
+  				<groupId>org.eclipse.m2e</groupId>
+  				<artifactId>lifecycle-mapping</artifactId>
+  				<version>1.0.0</version>
+  				<configuration>
+  					<lifecycleMappingMetadata>
+  						<pluginExecutions>
+  							<pluginExecution>
+  								<pluginExecutionFilter>
+  									<groupId>
+  										io.swagger.codegen.v3
+  									</groupId>
+  									<artifactId>
+  										swagger-codegen-maven-plugin
+  									</artifactId>
+  									<versionRange>
+  										[3.0.13,)
+  									</versionRange>
+  									<goals>
+  										<goal>generate</goal>
+  									</goals>
+  								</pluginExecutionFilter>
+  								<action>
+  									<ignore></ignore>
+  								</action>
+  							</pluginExecution>
+  						</pluginExecutions>
+  					</lifecycleMappingMetadata>
+  				</configuration>
+  			</plugin>
+  		</plugins>
+  	</pluginManagement>
+  </build>
+
+
+
+
+  <dependencies>
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+		    <groupId>com.google.guava</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>27.0.1-jre</version>
+		</dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.3.2</version>
+        </dependency>
+        
+    	<dependency>
+			<groupId>com.sparkjava</groupId>
+			<artifactId>spark-core</artifactId>
+			<version>2.7.2</version>
+		</dependency>	
+    
+  		 <dependency>
+		       <groupId>org.slf4j</groupId>
+		       <artifactId>slf4j-api</artifactId>
+		       <version>1.7.5</version>
+		   </dependency>
+		   
+		   <dependency>
+		       <groupId>org.slf4j</groupId>
+		       <artifactId>slf4j-log4j12</artifactId>
+		       <version>1.7.5</version>
+		   </dependency>
+  
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-api</artifactId>
+		    <version>0.10.5</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-impl</artifactId>
+		    <version>0.10.5</version>
+		</dependency>
+		<dependency>
+		    <groupId>io.jsonwebtoken</groupId>
+		    <artifactId>jjwt-jackson</artifactId>
+		    <version>0.10.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		
+      <dependency>
+          <groupId>org.glassfish.jersey.media</groupId>
+          <artifactId>jersey-media-multipart</artifactId>
+          <version>${jersey.version}</version>
+      </dependency>
+      
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet-core</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-common</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+
+ 		<dependency>
+		  <groupId>org.glassfish.jersey.connectors</groupId>
+		  <artifactId>jersey-grizzly-connector</artifactId>
+		  <version>${jersey.version}</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.glassfish.jersey.containers</groupId>
+		  <artifactId>jersey-container-grizzly2-http</artifactId>
+		  <version>${jersey.version}</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>org.glassfish.jersey.ext</groupId>
+		  <artifactId>jersey-entity-filtering</artifactId>
+		  <version>${jersey.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.glassfish.jersey.media</groupId>
+		    <artifactId>jersey-media-json-jackson</artifactId>
+		    <version>${jersey.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.glassfish.jersey.core</groupId>
+		    <artifactId>jersey-common</artifactId>
+		    <version>${jersey.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-base</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+		<dependency>
+		    <groupId>org.glassfish.jersey.inject</groupId>
+		    <artifactId>jersey-hk2</artifactId>
+		    <version>${jersey.version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>${jackson.version}</version>
+		</dependency>
+
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+          <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+          <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+          <groupId>com.fasterxml.jackson.jaxrs</groupId>
+          <artifactId>jackson-jaxrs-json-provider</artifactId>
+          <version>${jackson.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>org.openapitools</groupId>
+          <artifactId>jackson-databind-nullable</artifactId>
+          <version>${jackson-databind-nullable-version}</version>
+      </dependency> 
+      		
+		<dependency>
+		    <groupId>javax.websocket</groupId>
+		    <artifactId>javax.websocket-api</artifactId>
+		    <version>1.1</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.glassfish.grizzly/grizzly-websockets -->
+		<dependency>
+		    <groupId>org.glassfish.grizzly</groupId>
+		    <artifactId>grizzly-http-all</artifactId>
+		    <version>2.4.0</version>
+		</dependency>
+				
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-servlet-api</artifactId>
+			<version>8.0.32</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-jaxrs2 -->
+		<dependency>
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-jaxrs2</artifactId>
+			<version>2.0.10</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>io.swagger.core.v3</groupId>
+		    <artifactId>swagger-annotations</artifactId>
+		    <version>2.0.10</version>
+		</dependency>		
+  
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
